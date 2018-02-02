@@ -1,0 +1,32 @@
+apply plugin: 'groovy'
+
+sourceCompatibility = java_version
+targetCompatibility = java_version
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+
+    implementation "com.android.tools.build:gradle:$androidGradle"
+    implementation "org.aspectj:aspectjrt:$aspectj"
+    implementation "org.aspectj:aspectjtools:$aspectj"
+
+}
+
+
+group = GROUP
+version = VERSION_NAME
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('repo'))
+        }
+    }
+}
+
+task cleanPlugin(type: Delete, dependsOn: clean) {
+    delete "repo/"
+}
+
