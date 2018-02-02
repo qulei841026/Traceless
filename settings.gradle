@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':traceless-plugin', ':traceless-compiler', ':traceless-annotations'

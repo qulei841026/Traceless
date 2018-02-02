@@ -1,0 +1,17 @@
+apply plugin: 'java-library'
+
+sourceCompatibility = java_version
+targetCompatibility = java_version
+
+dependencies {
+    implementation project(':traceless-annotations')
+    implementation "org.aspectj:aspectjrt:$aspectj"
+
+    implementation 'com.squareup:javapoet:1.10.0'
+    implementation 'com.google.auto:auto-common:0.9'
+    compileOnly 'com.google.auto.service:auto-service:1.0-rc4'
+    compileOnly files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
+
+}
+
+
