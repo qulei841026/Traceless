@@ -6,6 +6,8 @@ package com.assassin.traceless.logic;
 
 public class User {
 
+    public String name = "Jack";
+
     public String getUserId() {
         return "001";
     }

@@ -20,7 +20,11 @@ public class LogoActivity extends AppCompatActivity implements Collections.Fetch
         setContentView(R.layout.activity_main);
         Log.d("qulei", "LogoActivity = onCreate");
 
-        String userId = new User().getUserId();
+        User user = new User();
+        user.name = "tony";
+        String userId = user.getUserId();
+        String name = user.name;
+        Log.d("qulei", "name = " + name);
         fetchData(userId, this);
     }
 
