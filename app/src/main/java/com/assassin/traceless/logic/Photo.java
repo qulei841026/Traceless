@@ -7,7 +7,9 @@ import android.util.Log;
  */
 
 public class Photo {
+    static final String TAG = "Photo";
+
     public void show(int index) {
-        Log.d("qulei", "Photo=show(" + index + ")");
+        Log.d(TAG, "Photo=show(" + index + ")");
     }
 }

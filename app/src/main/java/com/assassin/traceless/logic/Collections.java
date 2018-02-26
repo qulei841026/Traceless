@@ -11,6 +11,8 @@ import java.util.List;
 
 public class Collections {
 
+    static final String TAG = "Collections";
+
     private List<Photo> list = new ArrayList<Photo>() {
         {
             add(new Photo());
@@ -24,7 +26,6 @@ public class Collections {
     }
 
     public List<Photo> fetchCollections(String uid) {
-        Log.d("qulei", "fetchCollections");
         if (uid != null)
             return list;
         else
@@ -32,7 +33,7 @@ public class Collections {
     }
 
     public void testAbc() {
-        Log.d("qulei", "LogoActivity = testAbc");
+        Log.d(TAG, "testAbc");
     }
 
     public interface FetchListener {

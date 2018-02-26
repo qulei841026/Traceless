@@ -1,7 +1,5 @@
 package com.assassin.traceless;
 
-import android.util.Log;
-
 import com.assassin.traceless.annotations.compiler.Reporter;
 
 /**
@@ -11,7 +9,6 @@ import com.assassin.traceless.annotations.compiler.Reporter;
 public class AnnotationTest {
 
     @Reporter(value = 1)
-    public void report(){
-        Log.d("qulei","AnnotationTest = report ");
+    public void report(String abc) {
     }
 }

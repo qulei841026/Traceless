@@ -16,14 +16,14 @@ import org.aspectj.lang.annotation.Pointcut;
 @Aspect
 public class TraceAspect {
 
-    private static final String TAG = "qulei";
+    private static final String TAG = "TraceAspect";
 
     @Before("execution(* android.app.Activity.on**(..))")
     public void methodBefore1(JoinPoint joinPoint) throws Throwable {
         Log.d(TAG, "TraceAspect [Before]->" + joinPoint.getSignature().toString());
     }
 
-    @After("execution(* com.assassin.traceless.LogoActivity.fetchData(..))")
+    @After("call(* com.assassin.traceless.LogoActivity.fetchData(..))")
     public void methodAfter1(JoinPoint joinPoint) throws Throwable {
         Log.d(TAG, "TraceAspect [After]->" + joinPoint.getSignature().toString());
     }
@@ -45,16 +45,15 @@ public class TraceAspect {
     }
 
     @Around("call(* com.assassin.traceless.logic.Collections.fetchCollections(..))")
-    public void methodAround2(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object methodAround2(ProceedingJoinPoint joinPoint) throws Throwable {
         Log.d(TAG, "TraceAspect [Around]->" + joinPoint.getSignature().toString());
-        joinPoint.proceed();
+        return joinPoint.proceed();
     }
 
-    @Around("execution (* com.assassin.traceless.logic.Collections.testAbc(..))")
-    public void methodAround3(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("execution(* com.assassin.traceless.logic.Collections.testAbc(..))")
+    public Object methodAround3(ProceedingJoinPoint joinPoint) throws Throwable {
         Log.d(TAG, "TraceAspect [Around]->" + joinPoint.getSignature().toString());
-        joinPoint.proceed();
+        return joinPoint.proceed();
     }
-
 
 }

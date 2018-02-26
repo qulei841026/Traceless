@@ -5,27 +5,26 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.assassin.traceless.annotations.weaving.Burying;
+import com.assassin.traceless.annotations.weaving.Tracking;
 import com.assassin.traceless.logic.Collections;
 import com.assassin.traceless.logic.Photo;
 import com.assassin.traceless.logic.User;
 
 import java.util.List;
 
-
 public class LogoActivity extends AppCompatActivity implements Collections.FetchListener {
+
+    static final String TAG = "LogoActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d("qulei", "LogoActivity = onCreate");
-
         User user = new User();
         user.name = "tony";
-        String userId = user.getUserId();
-        String name = user.name;
-        Log.d("qulei", "name = " + name);
-        fetchData(userId, this);
+        Log.d(TAG, "name = " + user.name);
+        fetchData(user.getUserId(), this);
     }
 
     public void fetchData(final String userId, final Collections.FetchListener callBack) {
@@ -39,18 +38,15 @@ public class LogoActivity extends AppCompatActivity implements Collections.Fetch
                     e.printStackTrace();
                 }
                 callBack.onCall(new Collections(userId));
-
             }
         }.start();
-
     }
 
     @Override
+    @Burying
     public void onCall(Collections collections) {
-        Log.d("qulei", "LogoActivity = onCall");
         List<Photo> list = collections.fetchCollections("001");
         collections.testAbc();
-        Log.d("qulei", "list:" + list.size());
         for (int i = 0; i < list.size(); i++) {
             list.get(i).show(i);
         }
