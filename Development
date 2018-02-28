@@ -1,3 +1,7 @@
 测试验证：
 @Around 切入函数尽量定义返回值为Object的函数。
 execution与call区别：execution是在被切入的方法中，call是在调用被切入的方法前或者后
+
+
+增加功能：
+日志，函数执行效率，网络请求效率

@@ -5,7 +5,6 @@ import android.util.Log;
 /**
  * Created by Le-q on 2018/2/2.
  */
-
 public class Photo {
     static final String TAG = "Photo";
 

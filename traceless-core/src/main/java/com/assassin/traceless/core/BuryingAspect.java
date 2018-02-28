@@ -14,10 +14,10 @@ public class BuryingAspect {
 
     static final String TAG = "BuryingAspect";
 
-    private static final String ACTION_REPORT =
+    private static final String ANNOTATION_CLASS =
             "@com.assassin.traceless.annotations.weaving.Burying";
 
-    @Pointcut("within(" + ACTION_REPORT + " *)")
+    @Pointcut("within(" + ANNOTATION_CLASS + " *)")
     public void withinAnnotatedClass() {
     }
 
@@ -29,11 +29,11 @@ public class BuryingAspect {
     public void constructorInsideAnnotatedType() {
     }
 
-    @Pointcut("execution(" + ACTION_REPORT + " * *(..)) || methodInsideAnnotatedType()")
+    @Pointcut("execution(" + ANNOTATION_CLASS + " * *(..)) || methodInsideAnnotatedType()")
     public void method() {
     }
 
-    @Pointcut("execution(" + ACTION_REPORT + " *.new(..)) || constructorInsideAnnotatedType()")
+    @Pointcut("execution(" + ANNOTATION_CLASS + " *.new(..)) || constructorInsideAnnotatedType()")
     public void constructor() {
     }
 

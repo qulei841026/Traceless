@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Collections {
 
-    static final String TAG = "Collections";
+    private static final String TAG = "Collections";
 
     private List<Photo> list = new ArrayList<Photo>() {
         {

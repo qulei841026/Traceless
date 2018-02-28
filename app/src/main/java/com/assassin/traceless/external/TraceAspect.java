@@ -28,7 +28,7 @@ public class TraceAspect {
         Log.d(TAG, "TraceAspect [After]->" + joinPoint.getSignature().toString());
     }
 
-    @Pointcut("call(* com.assassin.traceless.logic.Photo.show(..))")
+    @Pointcut("execution(* com.assassin.traceless.logic.Photo.show(..))")
     public void methodCall1() {
         Log.d(TAG, "TraceAspect [methodCall]");
     }
@@ -38,19 +38,19 @@ public class TraceAspect {
         Log.d(TAG, "TraceAspect [Before]->" + joinPoint.getSignature().toString());
     }
 
-    @Around("execution(* com.assassin.traceless.LogoActivity.onCall(..))")
+    @Around("call(* com.assassin.traceless.LogoActivity.onCall(..))")
     public void methodAround1(ProceedingJoinPoint joinPoint) throws Throwable {
         Log.d(TAG, "TraceAspect [Around]->" + joinPoint.getSignature().toString());
         joinPoint.proceed();
     }
 
-    @Around("call(* com.assassin.traceless.logic.Collections.fetchCollections(..))")
+    @Around("execution(* com.assassin.traceless.logic.Collections.fetchCollections(..))")
     public Object methodAround2(ProceedingJoinPoint joinPoint) throws Throwable {
         Log.d(TAG, "TraceAspect [Around]->" + joinPoint.getSignature().toString());
         return joinPoint.proceed();
     }
 
-    @Around("execution(* com.assassin.traceless.logic.Collections.testAbc(..))")
+    @Around("call(* com.assassin.traceless.logic.Collections.testAbc(..))")
     public Object methodAround3(ProceedingJoinPoint joinPoint) throws Throwable {
         Log.d(TAG, "TraceAspect [Around]->" + joinPoint.getSignature().toString());
         return joinPoint.proceed();
