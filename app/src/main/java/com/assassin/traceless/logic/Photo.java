@@ -11,4 +11,9 @@ public class Photo {
     public void show(int index) {
         Log.d(TAG, "Photo=show(" + index + ")");
     }
+
+    @Override
+    public String toString() {
+        return "Photo{}";
+    }
 }

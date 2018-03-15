@@ -12,4 +12,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)
 public @interface Using {
+    String tag() default "Using";
 }

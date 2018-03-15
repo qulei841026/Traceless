@@ -1,6 +1,6 @@
 package com.assassin.traceless.compiler;
 
-import com.assassin.traceless.annotations.compiler.Reporter;
+import com.assassin.traceless.annotations.weaving.Using;
 import com.google.auto.service.AutoService;
 
 import java.lang.annotation.Annotation;
@@ -22,7 +22,7 @@ import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
 
 
-@AutoService(Processor.class)  // 注册注解处理器的库
+//@AutoService(Processor.class)  // 注册注解处理器的库
 @SuppressWarnings("WeakerAccess")
 public class TracelessCompilerProcessor1 extends AbstractProcessor {
 
@@ -53,7 +53,7 @@ public class TracelessCompilerProcessor1 extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         info("RoundEnvironment : %s .", roundEnv);
 
-        for (Element element : roundEnv.getElementsAnnotatedWith(Reporter.class)) {
+        for (Element element : roundEnv.getElementsAnnotatedWith(Using.class)) {
             info("element=%s", element);
             info("EnclosingElement=%s", element.getEnclosingElement());
             info("Kind=%s", element.getKind());
@@ -70,7 +70,7 @@ public class TracelessCompilerProcessor1 extends AbstractProcessor {
             for (AnnotationMirror item : element.getAnnotationMirrors()) {
                 info("AnnotationMirror=%s", item);
             }
-            
+
         }
         return false;
     }
@@ -92,7 +92,7 @@ public class TracelessCompilerProcessor1 extends AbstractProcessor {
 
     private Set<Class<? extends Annotation>> getSupportedAnnotations() {
         Set<Class<? extends Annotation>> annotations = new LinkedHashSet<>();
-        annotations.add(Reporter.class);
+        annotations.add(Using.class);
         return annotations;
     }
 

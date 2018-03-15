@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.assassin.traceless.annotations.weaving.Tracking;
+import com.assassin.traceless.core.external.UsingTransfer;
 import com.assassin.traceless.logic.Collections;
 import com.assassin.traceless.logic.Photo;
 import com.assassin.traceless.logic.User;
@@ -15,16 +17,28 @@ public class LogoActivity extends AppCompatActivity implements Collections.Fetch
 
     static final String TAG = "LogoActivity";
 
+    static {
+        UsingTransfer.getInstance().setInterceptor(new UsingTransfer.Interceptor() {
+            @Override
+            public boolean hold(String follow, String kind, String tag, String using, Object o) {
+                Log.d(TAG, "hold");
+                return false;
+            }
+        });
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         User user = new User();
         user.name = "tony";
+        user.id = "003";
         Log.d(TAG, "name = " + user.name);
         fetchData(user.getUserId(), this);
     }
 
+    @Tracking
     public void fetchData(final String userId, final Collections.FetchListener callBack) {
         new Thread() {
             @Override

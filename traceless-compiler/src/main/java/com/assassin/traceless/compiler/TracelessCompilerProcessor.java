@@ -12,7 +12,7 @@ import javax.tools.Diagnostic;
  * 注解处理器
  * Created by Qulit on 2018/1/31.
  */
-//@AutoService(Processor.class)  // 注册注解处理器的库
+@AutoService(Processor.class)  // 注册注解处理器的库
 public class TracelessCompilerProcessor extends BasicAnnotationProcessor {
 
     @Override
