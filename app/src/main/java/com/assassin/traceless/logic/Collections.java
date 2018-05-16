@@ -23,6 +23,7 @@ public class Collections {
         }
     };
 
+    @Using
     private String col = "col";
 
     public Collections(String uid) {

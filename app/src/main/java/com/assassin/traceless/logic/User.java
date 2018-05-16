@@ -8,6 +8,7 @@ import com.assassin.traceless.annotations.weaving.Using;
 
 public class User {
 
+    @Using
     public String name = "Jack";
 
     @Using

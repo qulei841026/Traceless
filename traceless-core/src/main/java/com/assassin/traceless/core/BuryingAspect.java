@@ -1,8 +1,7 @@
 package com.assassin.traceless.core;
 
-import android.util.Log;
-
 import com.assassin.traceless.annotations.weaving.Burying;
+import com.assassin.traceless.core.external.BuryingDispatcher;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -39,8 +38,7 @@ public class BuryingAspect {
 
     @Around("(method() || constructor()) && @annotation(burying)")
     public Object execute(ProceedingJoinPoint joinPoint, Burying burying) throws Throwable {
-        Log.d(TAG, "[execute]->" + joinPoint.getSignature().toString());
-        Log.d(TAG, "[value]->" + burying.value());
+        BuryingDispatcher.dispatcher(joinPoint, burying);
         return joinPoint.proceed();
     }
 }

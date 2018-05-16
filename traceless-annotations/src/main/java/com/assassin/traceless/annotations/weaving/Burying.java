@@ -6,11 +6,15 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Burying(方法调用栈)
+ * Burying
  * Created by Le-q on 2018/2/26.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.CONSTRUCTOR})
 public @interface Burying {
-    int value() default -1;
+
+    Class<?> clazz() default Object.class;
+
+    String name() default "Master";
+
 }

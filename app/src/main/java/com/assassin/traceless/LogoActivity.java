@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.assassin.traceless.annotations.weaving.Burying;
 import com.assassin.traceless.annotations.weaving.Tracking;
 import com.assassin.traceless.core.external.UsingTransfer;
 import com.assassin.traceless.logic.Collections;
@@ -28,6 +29,7 @@ public class LogoActivity extends AppCompatActivity implements Collections.Fetch
     }
 
     @Override
+//    @Burying
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -39,6 +41,7 @@ public class LogoActivity extends AppCompatActivity implements Collections.Fetch
     }
 
     @Tracking
+//    @Burying
     public void fetchData(final String userId, final Collections.FetchListener callBack) {
         new Thread() {
             @Override

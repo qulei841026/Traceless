@@ -1,5 +1,6 @@
 package com.assassin.traceless.compiler;
 
+import com.assassin.traceless.annotations.weaving.Burying;
 import com.assassin.traceless.annotations.weaving.Using;
 import com.google.auto.service.AutoService;
 
@@ -14,9 +15,7 @@ import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
-import javax.lang.model.element.AnnotationMirror;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.tools.Diagnostic;
@@ -55,22 +54,10 @@ public class TracelessCompilerProcessor1 extends AbstractProcessor {
 
         for (Element element : roundEnv.getElementsAnnotatedWith(Using.class)) {
             info("element=%s", element);
-            info("EnclosingElement=%s", element.getEnclosingElement());
-            info("Kind=%s", element.getKind());
-            info("SimpleName=%s", element.getSimpleName());
+        }
 
-            for (Modifier item : element.getModifiers()) {
-                info("modifier=%s", item);
-            }
-
-            for (Element item : element.getEnclosedElements()) {
-                info("Element=%s", item);
-            }
-
-            for (AnnotationMirror item : element.getAnnotationMirrors()) {
-                info("AnnotationMirror=%s", item);
-            }
-
+        for (Element element : roundEnv.getElementsAnnotatedWith(Burying.class)) {
+            info("element=%s", element);
         }
         return false;
     }
@@ -93,6 +80,7 @@ public class TracelessCompilerProcessor1 extends AbstractProcessor {
     private Set<Class<? extends Annotation>> getSupportedAnnotations() {
         Set<Class<? extends Annotation>> annotations = new LinkedHashSet<>();
         annotations.add(Using.class);
+        annotations.add(Burying.class);
         return annotations;
     }
 

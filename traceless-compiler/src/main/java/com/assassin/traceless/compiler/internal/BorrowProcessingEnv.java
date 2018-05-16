@@ -15,23 +15,24 @@ public abstract class BorrowProcessingEnv {
     protected ProcessingEnvironment processingEnv;
 
     protected Filer filer;
-    protected Messager messager;
+    protected static Messager messager;
     protected Elements elements;
 
     public BorrowProcessingEnv(ProcessingEnvironment processingEnv) {
         this.processingEnv = processingEnv;
 
         this.filer = processingEnv.getFiler();
-        this.messager = processingEnv.getMessager();
+        messager = processingEnv.getMessager();
         this.elements = processingEnv.getElementUtils();
+    }
+
+    public static void info(String msg, Object... args) {
+        messager.printMessage(Diagnostic.Kind.NOTE, String.format(msg, args));
     }
 
     protected void error(String msg, Object... args) {
         messager.printMessage(Diagnostic.Kind.ERROR, String.format(msg, args));
     }
 
-    protected void info(String msg, Object... args) {
-        messager.printMessage(Diagnostic.Kind.NOTE, String.format(msg, args));
-    }
 
 }
