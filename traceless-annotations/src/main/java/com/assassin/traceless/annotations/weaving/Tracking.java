@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Tracking(调用栈)
- * Created by lei.qu on 2018/2/24.
+ * Created by Qulit on 2018/2/24.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.CONSTRUCTOR})

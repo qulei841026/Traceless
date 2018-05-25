@@ -8,6 +8,7 @@ import com.assassin.traceless.compiler.setup.BuryingAssistSet;
 import com.assassin.traceless.compiler.setup.BuryingSchemaSet;
 import com.assassin.traceless.compiler.setup.ISet;
 import com.assassin.traceless.compiler.setup.UsingSet;
+import com.assassin.traceless.rules.ClazzRule;
 import com.google.auto.common.BasicAnnotationProcessor;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.SetMultimap;
@@ -59,7 +60,7 @@ public class TracelessGenerator extends BorrowProcessingEnv implements BasicAnno
             String key = burying.name();
 
             ISet set;
-            String schemaKey = key + Constants.SCHEMA_SUFFIX;
+            String schemaKey = key + ClazzRule.SCHEMA_SUFFIX;
             if (mapSet.containsKey(schemaKey)) {
                 set = mapSet.get(schemaKey);
             } else {
@@ -68,7 +69,7 @@ public class TracelessGenerator extends BorrowProcessingEnv implements BasicAnno
             }
             set.add(item);
 
-            String assistKey = key + Constants.ASSIST_SUFFIX;
+            String assistKey = key + ClazzRule.ASSIST_SUFFIX;
             if (mapSet.containsKey(assistKey)) {
                 set = mapSet.get(assistKey);
             } else {

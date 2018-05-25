@@ -10,7 +10,7 @@ import javax.lang.model.element.TypeElement;
 
 /**
  * Partner
- * Created by Le-q on 2018/3/19.
+ * Created by Qulit on 2018/3/19.
  */
 class Partner<T extends MemberSimple> {
 

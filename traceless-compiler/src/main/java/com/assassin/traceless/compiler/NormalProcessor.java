@@ -2,7 +2,6 @@ package com.assassin.traceless.compiler;
 
 import com.assassin.traceless.annotations.weaving.Burying;
 import com.assassin.traceless.annotations.weaving.Using;
-import com.google.auto.service.AutoService;
 
 import java.lang.annotation.Annotation;
 import java.util.LinkedHashSet;
@@ -12,7 +11,6 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
 import javax.annotation.processing.Messager;
 import javax.annotation.processing.ProcessingEnvironment;
-import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -23,7 +21,7 @@ import javax.tools.Diagnostic;
 
 //@AutoService(Processor.class)  // 注册注解处理器的库
 @SuppressWarnings("WeakerAccess")
-public class TracelessCompilerProcessor1 extends AbstractProcessor {
+public class NormalProcessor extends AbstractProcessor {
 
     private Filer filer;
     private Elements elements;

@@ -1,19 +1,25 @@
 package com.assassin.traceless.compiler.setup;
 
-import com.assassin.traceless.compiler.common.Constants;
+import com.assassin.traceless.compiler.common.Utils;
 import com.assassin.traceless.compiler.internal.BorrowProcessingEnv;
+import com.assassin.traceless.rules.ClazzRule;
+import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
+import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeSpec;
+
+import java.lang.ref.WeakReference;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
 import javax.lang.model.element.VariableElement;
 
 /**
  * BuryingSchemaSet
- * Created by Le-q on 2018/3/19.
+ * Created by Qulit on 2018/3/19.
  */
 public class BuryingSchemaSet extends BorrowProcessingEnv implements ISet, ICreator {
 
@@ -27,7 +33,7 @@ public class BuryingSchemaSet extends BorrowProcessingEnv implements ISet, ICrea
 
     @Override
     public TypeSpec.Builder createClazz() {
-        String clazzName = Constants.BURYING_PREFIX + classNameKey;
+        String clazzName = ClazzRule.BURYING_PREFIX + classNameKey;
         TypeSpec.Builder clazz = TypeSpec.interfaceBuilder(clazzName);
         clazz.addModifiers(Modifier.PUBLIC);
 
@@ -41,7 +47,7 @@ public class BuryingSchemaSet extends BorrowProcessingEnv implements ISet, ICrea
 
     @Override
     public String createPackage() {
-        return Constants.BURYING_PACKAGE_NAME;
+        return ClazzRule.BURYING_PACKAGE_NAME;
     }
 
     @Override
@@ -55,10 +61,15 @@ public class BuryingSchemaSet extends BorrowProcessingEnv implements ISet, ICrea
     }
 
     private MethodSpec.Builder createMethod(MethodSimple methodSimple) {
-        String methodName = methodSimple.methodName;
+        String methodName = Utils.createMethodName(methodSimple);
         MethodSpec.Builder method = MethodSpec.methodBuilder(methodName)
                 .returns(methodSimple.methodReturns)
                 .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT);
+
+        ParameterizedTypeName targetParam =
+                ParameterizedTypeName.get(ClassName.get(WeakReference.class),
+                        ClassName.get((TypeElement) methodSimple.enclosingElement));
+        method.addParameter(targetParam, "target");
 
         FieldSimple simple = new FieldSimple();
         for (VariableElement item : methodSimple.methodParameters) {

@@ -11,6 +11,7 @@ import org.gradle.api.tasks.compile.JavaCompile
 
 /**
  * gradle plugin integrated aspectjrt
+ * Created by Qulit on 2018/3/19.
  */
 class TracelessPlugin implements Plugin<Project> {
 

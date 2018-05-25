@@ -8,7 +8,8 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeMirror;
 
 /**
- * Created by Le-q on 2018/3/20.
+ * FieldSimple
+ * Created by Qulit on 2018/3/20.
  */
 public class FieldSimple implements MemberSimple {
 

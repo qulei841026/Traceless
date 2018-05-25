@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 /**
  * Using(全局变量使用日志)
- * Created by Le-q on 2018/2/26.
+ * Created by Qulit on 2018/2/26.
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.FIELD)

@@ -8,6 +8,10 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
+/**
+ * BuryingAspect
+ * Created by Qulit on 2018/3/19.
+ */
 @Aspect
 public class BuryingAspect {
 

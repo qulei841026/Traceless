@@ -3,6 +3,8 @@ package com.assassin.traceless.core.external;
 import android.util.Log;
 
 import com.assassin.traceless.annotations.weaving.Burying;
+import com.assassin.traceless.core.utils.MethodMatchUtils;
+import com.assassin.traceless.rules.ClazzRule;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -11,13 +13,9 @@ import java.util.Map;
 
 /**
  * BuryingDispatcher
- * Created by Le-q on 2018/3/19.
+ * Created by Qulit on 2018/3/19.
  */
 public class BuryingDispatcher {
-
-    private static final String BURYING_PREFIX = "Burying";
-    private static final String SCHEMA_SUFFIX = "Schema";
-    private static final String ASSIST_SUFFIX = "Assist";
 
     private static final String TAG = "BuryingDispatcher";
 
@@ -25,15 +23,16 @@ public class BuryingDispatcher {
     private static final Map<String, BuryingTransfer> assists = new LinkedHashMap<>();
 
     public static void dispatcher(final ProceedingJoinPoint joinPoint, Burying burying) {
-        Log.d(TAG, "[dispatcher]->" + joinPoint.getSignature().toString());
+        String assistName = ClazzRule.BURYING_PREFIX + burying.name() + ClazzRule.ASSIST_SUFFIX;
+        String schemaName = ClazzRule.BURYING_PREFIX + burying.name() + ClazzRule.SCHEMA_SUFFIX;
 
-        String assistName = BURYING_PREFIX + burying.name() + ASSIST_SUFFIX;
-        String schemaName = BURYING_PREFIX + burying.name() + SCHEMA_SUFFIX;
+        Log.d(TAG, "[assistName]->" + assistName);
+        Log.d(TAG, "[schemaName]->" + schemaName);
 
         try {
             BuryingTransfer transfer = assists.get(assistName);
             if (transfer == null) {
-                Class<?> xClass = Class.forName(assistName);
+                Class<?> xClass = Class.forName(ClazzRule.BURYING_PACKAGE_NAME + "." + assistName);
                 transfer = (BuryingTransfer) xClass.newInstance();
                 assists.put(assistName, transfer);
             }
@@ -45,9 +44,11 @@ public class BuryingDispatcher {
                 schemas.put(schemaName, schema);
             }
 
+            String invokeMethod = MethodMatchUtils.methodNameMaker(joinPoint);
+            Log.d(TAG, "[invokeMethod]->" + invokeMethod);
+
             if (transfer != null && schema != null) {
-                transfer.process(joinPoint.getTarget(), joinPoint.getSignature().toString(),
-                        joinPoint.getArgs(), schema);
+                transfer.process(joinPoint.getTarget(), invokeMethod, joinPoint.getArgs(), schema);
             }
 
         } catch (ClassNotFoundException e) {

@@ -29,7 +29,7 @@ public class LogoActivity extends AppCompatActivity implements Collections.Fetch
     }
 
     @Override
-//    @Burying
+    @Burying(clazz = BuryingAction.class)
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -41,7 +41,7 @@ public class LogoActivity extends AppCompatActivity implements Collections.Fetch
     }
 
     @Tracking
-//    @Burying
+    @Burying(clazz = BuryingAction.class)
     public void fetchData(final String userId, final Collections.FetchListener callBack) {
         new Thread() {
             @Override
@@ -58,6 +58,7 @@ public class LogoActivity extends AppCompatActivity implements Collections.Fetch
     }
 
     @Override
+    @Burying(name = "Call")
     public void onCall(Collections collections) {
         List<Photo> list = collections.fetchCollections("001");
         collections.testAbc();
